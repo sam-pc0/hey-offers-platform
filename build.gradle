@@ -38,5 +38,6 @@ allprojects {
 
 dependencies {
     implementation project("platform:product-service")
+    implementation project("platform:user-service")
 }
 

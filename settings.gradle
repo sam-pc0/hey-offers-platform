@@ -1,5 +1,4 @@
 rootProject.name = 'hey-offers-platform'
-include 'platform:gateway-service',
-        'platform:user-service',
+include 'platform:user-service',
         'platform:product-service'
 

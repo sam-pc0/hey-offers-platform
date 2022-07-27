@@ -1,19 +1,42 @@
 plugins {
+    id 'org.springframework.boot' version '2.7.1'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
 }
 
-group 'hey-project'
-version '1.0-SNAPSHOT'
+subprojects {
+    apply plugin: 'java';
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+    bootJar { enabled = false }
+    jar { enabled = true }
+}
 
-repositories {
-    mavenCentral()
+allprojects {
+    group 'platform'
+    version '1.0-SNAPSHOT'
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+        annotationProcessor 'org.projectlombok:lombok'
+        compileOnly 'org.projectlombok:lombok'
+        testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
+    }
+
+    test {
+        useJUnitPlatform()
+    }
+
 }
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
+    implementation project("platform:product-service")
 }
 
-test {
-    useJUnitPlatform()
-}
